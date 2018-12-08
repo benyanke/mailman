@@ -15,6 +15,15 @@ $ cd mailman
 $ go build && ./mailman
 ```
 
+## Config
+
+tbd.
+
+**Configuration Overrides**
+
+  * Configuration directory is in ~/.mailman
+    * Override with `--configdir`
+
 ## Future
 
 Use this imap library: https://github.com/emersion/go-imap
