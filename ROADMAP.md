@@ -12,6 +12,7 @@ add smtp later
 ## Sections/modules needed
 
  * config reading (dotdir plus envs for some overrides like config path or debug mode)
+ * tests
  * imap library (initial auth, fetch mailbox, fetch mail list, fetch individual mail info
  * gui layout
  * threaidng logic
