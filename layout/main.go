@@ -8,12 +8,12 @@ import (
 )
 
 func layout(g *gocui.Gui) error {
+
 	maxX, maxY := g.Size()
+	// TODO: Add debug-level logging for max size params
 
 	// Enable mouse support once it is done for clicking
 	// g.Mouse = true
-
-	// Test view
 
 	if v, err := g.SetView("side", 1, 1, int(0.2*float32(maxX)), maxY-5); err != nil {
 		// Handle errors
@@ -22,8 +22,10 @@ func layout(g *gocui.Gui) error {
 		}
 
 		// Set settings for pane
+		// TODO: Make this configurable
 		v.Title = "Folders"
 		v.Editable = true
+		// TODO: Make this configurable
 		v.Wrap = true
 	}
 
