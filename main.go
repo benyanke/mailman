@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 	"log"
-
+	"github.com/benyanke/mailman/config"
 	"github.com/jroimartin/gocui"
 )
 
 func main() {
+//	fmt.Println(config.GetConfigDir())
 	g, err := gocui.NewGui(gocui.OutputNormal)
 	if err != nil {
 		log.Panicln(err)
@@ -31,7 +32,7 @@ func layout(g *gocui.Gui) error {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
-		fmt.Fprintln(v, "Hello world!")
+		fmt.Fprintln(v, config.GetConfigDir())
 	}
 	return nil
 }
