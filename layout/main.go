@@ -3,10 +3,10 @@
 package layout
 
 import (
-//	"fmt"
+	//	"fmt"
 	"github.com/jroimartin/gocui"
 	"log"
-//    "strconv"
+	//    "strconv"
 )
 
 func layout(g *gocui.Gui) error {
@@ -26,10 +26,12 @@ func layout(g *gocui.Gui) error {
 
 	// Formula for the x value of the folder/message seperator
 	// Currently, 20% of screen width
+	// TODO: Implement a minimum width
 	var verticalSplitPoint int = int(0.2 * float32(maxX))
 
 	// Formula for the y value of the mail body seperator
 	// Currently 40% of screen height
+	// TODO: Implement a minimum width - partially implemented below, but causing panics as-is
 	var bodySplitPoint int = maxY - int(0.4*float32(maxY))
 
 	// TODO: This min doesn't seem to be fully working
