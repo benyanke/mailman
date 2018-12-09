@@ -25,3 +25,6 @@ add smtp later
 ## Nice to have future piceses:
 
  * CLI interface for checking mail and doing actions from scripts (cobra)
+ * CalDAV contact integration w/ caldav server (with local cache of course)
+ * caldav task integration
+ * Calendar? Maybe too much?
