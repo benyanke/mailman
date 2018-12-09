@@ -15,7 +15,7 @@ func layout(g *gocui.Gui) error {
 	// Enable mouse support once it is done for clicking
 	// g.Mouse = true
 
-	if v, err := g.SetView("side", 1, 1, int(0.2*float32(maxX)), maxY-5); err != nil {
+	if v, err := g.SetView("side", 1, 1, int(0.2*float32(maxX)), maxY-1); err != nil {
 		// Handle errors
 		if err != gocui.ErrUnknownView {
 			return err
@@ -29,7 +29,7 @@ func layout(g *gocui.Gui) error {
 		v.Wrap = true
 	}
 
-	if v, err := g.SetView("main", int(0.2*float32(maxX)), 1, maxX-2, maxY-5); err != nil {
+	if v, err := g.SetView("main", int(0.2*float32(maxX)), 1, maxX-1, maxY-1); err != nil {
 		// Handle errors
 		if err != gocui.ErrUnknownView {
 			return err
@@ -43,10 +43,20 @@ func layout(g *gocui.Gui) error {
 		v.Wrap = true
 	}
 
-	if _, err := g.SetView("cmdline", -1, maxY-5, maxX, maxY); err != nil &&
-		err != gocui.ErrUnknownView {
-		return err
+	if v, err := g.SetView("cmdline", 1, maxY-5, maxX-1, maxY-1); err != nil {
+		// Handle errors
+		if err != gocui.ErrUnknownView {
+			return err
+		}
+
+		// Set settings for pane
+		// TODO: Make this configurable
+		v.Title = "Content"
+		v.Editable = false
+		// TODO: Make this configurable
+		v.Wrap = true
 	}
+
 	return nil
 }
 
