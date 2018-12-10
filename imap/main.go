@@ -11,6 +11,25 @@ import (
 	//    "strconv"
 )
 
+type Account struct {
+	name      string
+	email     string
+	mailboxes []Mailbox
+}
+type Mailbox struct {
+	// config    config // store config here
+	name     string
+	children []Mailbox
+	mail     []Mail
+}
+
+type Mail struct {
+	fromName  string
+	fromEmail string
+	subject   string
+	body      string
+}
+
 // Just a proof of concept
 func Test() {
 
@@ -22,6 +41,9 @@ func Test() {
 
 	log.Println("Connecting to " + host + " with " + user + ":::" + pass + "...")
 
+	account := Account{name: host, email: user}
+
+	log.Println("Created account object for " + account.name)
 	// Connect to server
 	c, err := client.DialTLS(host+":993", nil)
 	if err != nil {
@@ -46,7 +68,16 @@ func Test() {
 	}()
 
 	log.Println("Mailboxes:")
+
+	// TODO : Add caching to this, currently loading on every execution from the server
+	// ideally, this entire datastructure can be stored locally in json, and then
+	// refreshed in the background once it's displayed
+	//
+	// also perhaps add a cron CLI flag you can add to crontab to precache new mail offline in the cache
+	//
 	for m := range mailboxes {
+		var mailbox Mailbox = Mailbox{ name:m.Name }
+		account.mailboxes = append(account.mailboxes, mailbox)
 		log.Println("* " + m.Name)
 	}
 
