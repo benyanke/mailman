@@ -27,7 +27,7 @@ tbd.
 
 ## Current State
 Working/done:
- * imap proof of concept (run `notmain` method and ensure you've set env vars `imap_host`, `imap_user`, and `imap_pass`
+ * imap proof of concept (run `notmain` method and ensure you've set env vars `imap_host`, `imap_user`, and `imap_pass`)
  * absolute basic 3 pane layout
  
  ![Screenshot of current state of three pane view](_img/current-state-12-09-2018.png)
