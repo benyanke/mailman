@@ -12,7 +12,8 @@ import (
 )
 
 type Account struct {
-	name      string
+	name string
+	// TODO: Add account-specific config here once config functions are done
 	email     string
 	mailboxes []Mailbox
 }
@@ -78,7 +79,7 @@ func Test() {
 
 	// TODO: add proper support for nested mailboxes, currently they just use dot-notation to seperate levels
 	for m := range mailboxes {
-		var mailbox Mailbox = Mailbox{ name:m.Name }
+		var mailbox Mailbox = Mailbox{name: m.Name}
 		account.mailboxes = append(account.mailboxes, mailbox)
 		log.Println("* " + m.Name)
 	}
