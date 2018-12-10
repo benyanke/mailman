@@ -9,11 +9,12 @@ import (
 	"log"
 )
 
-func main() {
+func notmain() {
+	// Working proof-of-concept for fetching imap mailboxes and mail
 	imap.Test()
 }
 
-func notmain() {
+func main() {
 	layout.Run()
 
 	g, err := gocui.NewGui(gocui.OutputNormal)
