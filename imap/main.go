@@ -1,6 +1,6 @@
 // Handles the imap interactions
 
-package imapwrap
+package imap
 
 import (
 	"log"
@@ -14,16 +14,16 @@ import (
 // Just a proof of concept
 func Test() {
 
+	var user, pass, host string
 
-    var user, pass, hoststring
-    user = os.Getenv("imap_user")
-    pass = os.Getenv("imap_pass")
-    host = os.Getenv("imap_host")
+	user = os.Getenv("imap_user")
+	pass = os.Getenv("imap_pass")
+	host = os.Getenv("imap_host")
 
-	log.Println("Connecting to " + host + " ...")
+	log.Println("Connecting to " + host + " with " + user + ":::" + pass + "...")
 
 	// Connect to server
-	c, err := client.DialTLS(host + ":993", nil)
+	c, err := client.DialTLS(host+":993", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -41,7 +41,7 @@ func Test() {
 	// List mailboxes
 	mailboxes := make(chan *imap.MailboxInfo, 10)
 	done := make(chan error, 1)
-	go func () {
+	go func() {
 		done <- c.List("", "*", mailboxes)
 	}()
 
@@ -87,6 +87,5 @@ func Test() {
 	}
 
 	log.Println("Done!")
-
 
 }

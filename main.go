@@ -3,17 +3,19 @@ package main
 import (
 	"fmt"
 	"github.com/benyanke/mailman/config"
-	"github.com/benyanke/mailman/imapwrap"
+	"github.com/benyanke/mailman/imap"
 	"github.com/benyanke/mailman/layout"
 	"github.com/jroimartin/gocui"
 	"log"
 )
 
 func main() {
-	imapwrap.Test()
+	imap.Test()
+}
 
+func notmain() {
 	layout.Run()
-	//	fmt.Println(config.GetConfigDir())
+
 	g, err := gocui.NewGui(gocui.OutputNormal)
 	if err != nil {
 		log.Panicln(err)
