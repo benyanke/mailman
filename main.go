@@ -3,12 +3,15 @@ package main
 import (
 	"fmt"
 	"github.com/benyanke/mailman/config"
+	"github.com/benyanke/mailman/imapwrap"
 	"github.com/benyanke/mailman/layout"
 	"github.com/jroimartin/gocui"
 	"log"
 )
 
 func main() {
+	imapwrap.Test()
+
 	layout.Run()
 	//	fmt.Println(config.GetConfigDir())
 	g, err := gocui.NewGui(gocui.OutputNormal)
@@ -30,11 +33,13 @@ func main() {
 
 func layoutFunc(g *gocui.Gui) error {
 	maxX, maxY := g.Size()
-	if v, err := g.SetView("hello", maxX/2-7, maxY/2, maxX/2+7, maxY/2+2); err != nil {
+	var sizeX int = 40
+	var sizeY int = 10
+	if v, err := g.SetView("hello", maxX/2-sizeX, maxY/2, maxX/2+sizeX, maxY/2+sizeY); err != nil {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
-		fmt.Fprintln(v, config.GetConfigDir())
+		fmt.Fprintln(v, "Reading config from "+config.GetConfigDir())
 	}
 	return nil
 }
