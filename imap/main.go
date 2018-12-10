@@ -75,6 +75,8 @@ func Test() {
 	//
 	// also perhaps add a cron CLI flag you can add to crontab to precache new mail offline in the cache
 	//
+
+	// TODO: add proper support for nested mailboxes, currently they just use dot-notation to seperate levels
 	for m := range mailboxes {
 		var mailbox Mailbox = Mailbox{ name:m.Name }
 		account.mailboxes = append(account.mailboxes, mailbox)
