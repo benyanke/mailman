@@ -3,11 +3,13 @@
 package layout
 
 import (
-	//	"fmt"
+	"fmt"
 	"github.com/jroimartin/gocui"
 	"log"
 	//    "strconv"
 )
+
+var mailboxes []string
 
 func layout(g *gocui.Gui) error {
 
@@ -59,6 +61,12 @@ func layout(g *gocui.Gui) error {
 		v.Editable = true
 		// TODO: Make this configurable
 		v.Wrap = true
+
+		for _, mailbox := range mailboxes {
+			fmt.Fprintln(v, mailbox)
+		}
+
+
 	}
 
 	if v, err := g.SetView("messages", verticalSplitPoint, 1, maxX-1, bodySplitPoint); err != nil {
@@ -100,7 +108,10 @@ func quit(g *gocui.Gui, v *gocui.View) error {
 	return gocui.ErrQuit
 }
 
-func Run() {
+func Run(m []string) {
+
+	mailboxes = m
+
 	g, err := gocui.NewGui(gocui.OutputNormal)
 	if err != nil {
 		log.Panicln(err)

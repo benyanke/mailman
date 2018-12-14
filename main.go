@@ -11,11 +11,17 @@ import (
 
 func notmain() {
 	// Working proof-of-concept for fetching imap mailboxes and mail
-	imap.Test()
+	imap.TestSetup()
 }
 
 func main() {
-	layout.Run()
+	// Mailbox names listed here
+	var mailboxes []string
+
+	imap.TestSetup()
+	mailboxes = imap.GetMailboxList()
+
+	layout.Run(mailboxes)
 
 	g, err := gocui.NewGui(gocui.OutputNormal)
 	if err != nil {

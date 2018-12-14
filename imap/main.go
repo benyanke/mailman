@@ -11,6 +11,8 @@ import (
 	//    "strconv"
 )
 
+var account Account
+
 type Account struct {
 	name string
 	// TODO: Add account-specific config here once config functions are done
@@ -31,8 +33,18 @@ type Mail struct {
 	body      string
 }
 
+func GetMailboxList() ([]string) {
+
+		var ret []string
+
+    for _, m := range account.mailboxes {
+        ret = append(ret, m.name)
+    }
+    return ret
+}
+
 // Just a proof of concept
-func Test() {
+func TestSetup() {
 
 	var user, pass, host string
 
@@ -42,7 +54,7 @@ func Test() {
 
 	log.Println("Connecting to " + host + " with " + user + ":::" + pass + "...")
 
-	account := Account{name: host, email: user}
+	account = Account{name: host, email: user}
 
 	log.Println("Created account object for " + account.name)
 	// Connect to server
@@ -83,6 +95,8 @@ func Test() {
 		account.mailboxes = append(account.mailboxes, mailbox)
 		log.Println("* " + m.Name)
 	}
+
+	log.Println(account.mailboxes)
 
 	if err := <-done; err != nil {
 		log.Fatal(err)
