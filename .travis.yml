@@ -20,6 +20,7 @@ before_script:
   - travis_retry go get github.com/golang/dep/cmd/dep                                   # golang package manager
   # - travis_retry go get github.com/fzipp/gocyclo                                       # Not sure what this is
 
+
   # Fetch dependencies
   - travis_retry dep ensure
 
