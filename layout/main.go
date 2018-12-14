@@ -63,7 +63,9 @@ func layout(g *gocui.Gui) error {
 		v.Wrap = true
 
 		for _, mailbox := range mailboxes {
-			fmt.Fprintln(v, mailbox)
+			// TODO: Implement sorting (manually pull out given inboxes before the general group)
+			// TODO: Implement scanning of nested inboxes and proper handling
+			fmt.Fprintln(v, "  - " + mailbox)
 		}
 
 
