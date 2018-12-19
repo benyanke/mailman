@@ -15,6 +15,13 @@ func notmain() {
 }
 
 func main() {
+
+	// Parse config from the various datasources
+	config := config.Configuration{}
+	config.LoadConfig()
+
+	fmt.Println(config)
+
 	// Mailbox names listed here
 	var mailboxes []string
 
@@ -48,7 +55,7 @@ func layoutFunc(g *gocui.Gui) error {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
-		fmt.Fprintln(v, "Reading config from "+config.GetConfigDir())
+		fmt.Fprintln(v, "Reading config")
 	}
 	return nil
 }
