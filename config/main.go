@@ -34,21 +34,20 @@ func (c Configuration) LoadConfig() {
 	// TODO: Add a method here to use a flag or env at runtime to specify a custom dir
 
 	// Set the name of the configuration file
-	var configFile string = "config.yaml"
+	var configName string = "config"
+	var configType string = "yaml"
 
 	// Set config type
-	// viper.SetConfigType(configType)
-	// viper.SetConfigName(configName) // name of config file (without extension)
+	viper.SetConfigName(configName)
+	viper.SetConfigType(configType)
 
-	// This replaces the two commands above
-	viper.SetConfigFile(configFile)
 
-	// System-wide config
+	// Paths to check for config files
 	viper.AddConfigPath("/etc/mailman")
-	// Look for config in the working directory
-	viper.AddConfigPath(".")
-	// Look in dotfile directory
 	viper.AddConfigPath("$HOME/.mailman")
+
+	// TODO: remove this, perhaps
+	// viper.AddConfigPath(".") // working directory
 
 	// Find and read the config file
 	err := viper.ReadInConfig()
@@ -58,7 +57,7 @@ func (c Configuration) LoadConfig() {
 		// Handle specific errors before falling back to general error
 
 		// Check if error is "config not found"
-		if strings.HasPrefix(err.Error(), "Config File \"" + configFile + "\" Not Found") {
+		if strings.HasPrefix(err.Error(), "Config File \"" + configName + "\" Not Found") {
 			panic(fmt.Errorf("Configuration file could not be found. Can not continue"))
 
 			// TODO: add example0-config writing with viper.WriteConfigAs() here later
@@ -71,7 +70,7 @@ func (c Configuration) LoadConfig() {
 	}
 
 
-	c.loaded = true
+	// c.loaded = true
 
 }
 
