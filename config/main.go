@@ -92,3 +92,6 @@ func getConfigDir() string {
 	return cfgDir
 
 }
+
+
+// good example of how to structure: https://scene-si.org/2017/04/20/managing-configuration-with-viper/
