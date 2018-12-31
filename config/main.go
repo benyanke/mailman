@@ -12,6 +12,7 @@ import (
 )
 
 // This struct contains the config
+/*
 type Configuration struct {
 	// Set to false until the initial load happens
 	loaded bool
@@ -24,6 +25,7 @@ type Configuration struct {
 	imap_user string
 	imap_pass string
 }
+*/
 
 // Loads all the configuration values into the struct from the various locations
 func (c Configuration) LoadConfig() {
