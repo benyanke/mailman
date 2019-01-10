@@ -1,4 +1,4 @@
-// Find config dir: if env or flag override not set, use default
+ // Find config dir: if env or flag override not set, use default
 // Set default config dir in viper
 
 package config
@@ -60,7 +60,7 @@ func (c Configuration) LoadConfig() {
 
 		// Check if error is "config not found"
 		if strings.HasPrefix(err.Error(), "Config File \"" + configName + "\" Not Found") {
-			panic(fmt.Errorf("Configuration file could not be found. Can not continue"))
+			panic(fmt.Errorf("Configuration file (~/.mailman/" + configName + ".yml) could not be found - can not continue.\n\nCreate an empty file to continue with development.\n\nTODO: Add piece which could create config with --firstrun later"))
 
 			// TODO: add example0-config writing with viper.WriteConfigAs() here later
 
