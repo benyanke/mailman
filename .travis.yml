@@ -38,6 +38,9 @@ script:
 
   # Full compile test
   - go build
+
+  # Create blank config file
+  - touch ~/.mailman/config.yml
   - ./mailman || echo "failure"
 
 
