@@ -30,11 +30,6 @@ type Configuration struct {
 // Loads all the configuration values into the struct from the various locations
 func (c Configuration) LoadConfig() {
 
-	// Load the base directory for the configuration
-	// c.configDir = getConfigDir()
-
-	// TODO: Add a method here to use a flag or env at runtime to specify a custom dir
-
 	// Set the name of the configuration file
 	var configName string = "config"
 	var configType string = "yaml"
@@ -43,10 +38,15 @@ func (c Configuration) LoadConfig() {
 	viper.SetConfigName(configName)
 	viper.SetConfigType(configType)
 
+	// Set the default values to later be overridden
+	setConfigDefaults()
 
 	// Paths to check for config files
 	viper.AddConfigPath("/etc/mailman")
 	viper.AddConfigPath("$HOME/.mailman")
+	// TODO: Add a method here to use a flag or env at runtime to specify a custom dir
+
+
 
 	// TODO: remove this, perhaps
 	// viper.AddConfigPath(".") // working directory
@@ -71,8 +71,19 @@ func (c Configuration) LoadConfig() {
 
 	}
 
+	// TODO: remove later
+	viper.Debug()
 
 	// c.loaded = true
+
+}
+
+// Handles all the default configuration, allowing them to be easily
+// set in one place
+func setConfigDefaults() {
+	// TODO: improve seperation of imap module into it's own seperate backend piece
+	// Default imap timeout
+	viper.SetDefault("imap_default_dimeout", "10")
 
 }
 
