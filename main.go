@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/benyanke/mailman/config"
-	"github.com/benyanke/mailman/imap"
+	"github.com/benyanke/mailman/backend/imap"
 	"github.com/benyanke/mailman/layout"
 	"github.com/jroimartin/gocui"
 	"log"
