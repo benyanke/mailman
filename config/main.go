@@ -38,41 +38,50 @@ func (c Configuration) LoadConfig() {
 	viper.SetConfigName(configName)
 	viper.SetConfigType(configType)
 
+	// Setup the struct
+	var configuration Configuration
+
 	// Set the default values to later be overridden
 	setConfigDefaults()
 
 	// Paths to check for config files
 	viper.AddConfigPath("/etc/mailman")
 	viper.AddConfigPath("$HOME/.mailman")
-	// TODO: Add a method here to use a flag or env at runtime to specify a custom dir
-
-	// TODO: remove this, perhaps
-	// viper.AddConfigPath(".") // working directory
+	// Implement XDG config path here (XDG_CONFIG_HOME, if not set, ~/.config/appname)
+	// TODO: Add a method here to use a flag or env at runtime to specify a custom config dir or config file
 
 	// Find and read the config file
-	err := viper.ReadInConfig()
+	errRead := viper.ReadInConfig()
 
-	if err != nil {
+	if errRead != nil {
 
 		// Handle specific errors before falling back to general error
 
 		// Check if error is "config not found"
-		if strings.HasPrefix(err.Error(), "Config File \""+configName+"\" Not Found") {
+		if strings.HasPrefix(errRead.Error(), "Config File \""+configName+"\" Not Found") {
 			panic(fmt.Errorf("Configuration file (~/.mailman/" + configName + ".yml) could not be found - can not continue.\n\nCreate an empty file to continue with development.\n\nTODO: Add piece which could create config with --firstrun later"))
 
 			// TODO: add example0-config writing with viper.WriteConfigAs() here later
 
-			// Throw generic error
 		} else {
-			panic(err)
+			// Throw generic error if a more specific one not found
+			panic(errRead)
 		}
 
 	}
 
+	// Marshall the config into the structs
+	errMarsh := viper.Unmarshal(&configuration)
+	if errMarsh != nil {
+//		log.Fatalf("unable to decode into struct, %v", errMarsh)
+	}
+
+
+
+//        log.Printf("port is %d", configuration.ImapServer.Port)
+
 	// TODO: remove later
 	viper.Debug()
-
-	// c.loaded = true
 
 }
 
@@ -81,7 +90,7 @@ func (c Configuration) LoadConfig() {
 func setConfigDefaults() {
 	// TODO: improve seperation of imap module into it's own seperate backend piece
 	// Default imap timeout
-	viper.SetDefault("imap_default_dimeout", "10")
+	viper.SetDefault("ImapServer.Port", "993")
 
 }
 

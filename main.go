@@ -20,7 +20,12 @@ func main() {
 	config := config.Configuration{}
 	config.LoadConfig()
 
-	fmt.Println(config)
+
+
+        log.Printf("port is %d", config.ImapServer.Port)
+//        log.Print("port is " + config.ImapServer.Port)
+
+//	fmt.Println(config)
 
 	// Mailbox names listed here
 	var mailboxes []string
