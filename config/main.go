@@ -1,14 +1,14 @@
- // Find config dir: if env or flag override not set, use default
+// Find config dir: if env or flag override not set, use default
 // Set default config dir in viper
 
 package config
 
 import (
-	"strings"
 	"flag"
 	"fmt"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
+	"strings"
 )
 
 // This struct contains the config
@@ -46,8 +46,6 @@ func (c Configuration) LoadConfig() {
 	viper.AddConfigPath("$HOME/.mailman")
 	// TODO: Add a method here to use a flag or env at runtime to specify a custom dir
 
-
-
 	// TODO: remove this, perhaps
 	// viper.AddConfigPath(".") // working directory
 
@@ -59,12 +57,12 @@ func (c Configuration) LoadConfig() {
 		// Handle specific errors before falling back to general error
 
 		// Check if error is "config not found"
-		if strings.HasPrefix(err.Error(), "Config File \"" + configName + "\" Not Found") {
+		if strings.HasPrefix(err.Error(), "Config File \""+configName+"\" Not Found") {
 			panic(fmt.Errorf("Configuration file (~/.mailman/" + configName + ".yml) could not be found - can not continue.\n\nCreate an empty file to continue with development.\n\nTODO: Add piece which could create config with --firstrun later"))
 
 			// TODO: add example0-config writing with viper.WriteConfigAs() here later
 
-		// Throw generic error
+			// Throw generic error
 		} else {
 			panic(err)
 		}
@@ -105,6 +103,5 @@ func getConfigDir() string {
 	return cfgDir
 
 }
-
 
 // good example of how to structure: https://scene-si.org/2017/04/20/managing-configuration-with-viper/

@@ -8,5 +8,4 @@ type ImapServer struct {
 
 	// Seconds
 	Timeout int
-
 }
